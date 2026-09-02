@@ -219,5 +219,9 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# PyTest
+tests/
+out/
+
 # Data
 data/
