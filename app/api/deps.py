@@ -24,6 +24,10 @@ def get_ocr_semaphore(request: Request) -> asyncio.Semaphore:
     return request.app.state.ocr_semaphore
 
 
+def get_batch_jobs(request: Request):
+    return request.app.state.batch_jobs
+
+
 async def read_and_validate_image(upload: UploadFile) -> bytes:
     if upload.content_type not in settings.allowed_content_types:
         raise HTTPException(

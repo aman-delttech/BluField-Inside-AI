@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     max_upload_bytes: int = 10 * 1024 * 1024  # 10MB
     allowed_content_types: tuple[str, ...] = ("image/jpeg", "image/png", "image/webp")
 
+    max_sheet_upload_bytes: int = 5 * 1024 * 1024  # a 210-row sheet is ~230KB; generous headroom
+
     max_concurrent_ocr: int = 1  # ollama serializes anyway; cap in-flight requests here
 
 
