@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAMA Meter Image AI Validation Portal</title>
+    <link rel="icon" type="image/png" href="/static/assets/NEDC_tranperant.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <img src="/static/assets/NEDC_tranperant.png" alt="NAMA Logo" class="header-logo">
+            <h1 class="header-title">NAMA Meter Image AI Validation Portal</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Column 1: Upload Form -->
+        <section class="card upload-section">
+            <h2>Extract Meter Data</h2>
+            <form id="extract-form">
+                <div class="form-group">
+                    <label for="meter_type">Meter Type</label>
+                    <select id="meter_type" name="meter_type" class="modern-select" required>
+                        <option value="" disabled selected>Select Meter Type...</option>
+                        <option value="old">Old Meter</option>
+                        <option value="new">New Meter</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="account_no">Account Number</label>
+                    <input type="text" id="account_no" name="account_no" required placeholder="e.g. 00519041">
+                </div>
+
+                <div class="form-group">
+                    <label>Details Image (Nameplate)</label>
+                    <div class="file-drop-area" id="drop-area-details">
+                        <span class="file-msg">Choose file or drag here</span>
+                        <input type="file" id="details_image" name="details_image" accept="image/jpeg, image/png, image/webp" class="file-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Reading Image (LCD)</label>
+                    <div class="file-drop-area" id="drop-area-reading">
+                        <span class="file-msg">Choose file or drag here</span>
+                        <input type="file" id="reading_image" name="reading_image" accept="image/jpeg, image/png, image/webp" class="file-input" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Extract Data</button>
+            </form>
+        </section>
+
+        <!-- Column 2: Extraction Results -->
+        <section class="card results-section">
+            <h2>Extraction Results</h2>
+            
+            <div id="extraction-empty" class="empty-state">
+                No data extracted yet. Fill out the form and extract to see results here.
+            </div>
+            
+            <div id="extraction-content" style="display: none;">
+                <h3 class="capsule-heading">Parsed Fields</h3>
+                <div id="extraction-data" class="data-display"></div>
+                <button id="verify-btn" class="btn btn-primary" style="margin-top: 1.5rem;">Verify Data</button>
+            </div>
+        </section>
+        
+        <!-- Column 3: Verification Results -->
+        <section class="card verification-section">
+            <h2>Verification Results</h2>
+            
+            <div id="verification-empty" class="empty-state">
+                Awaiting verification. Extract data first, then click Verify.
+            </div>
+            
+            <div id="verification-content" class="verification-display" style="display: none;">
+                <h3 class="capsule-heading">Verification Summary</h3>
+                <div id="verification-summary"></div>
+                <table class="verification-table">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Extracted</th>
+                            <th>Expected</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="verification-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="loading-overlay" class="overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p id="loading-text">Extracting meter data using local OCR model. This may take 10-40 seconds...</p>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
